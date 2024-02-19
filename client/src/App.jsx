@@ -4,6 +4,11 @@ import {
   disconnectSocket,
   subscribeToChat,
 } from "./api/socketio";
+import Chat from "./pages/Chat";
+import Join from "./pages/Join";
+import Protected from "./components/ProtectedRoutes";
+
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 
 function App() {
   useEffect(() => {
@@ -17,9 +22,20 @@ function App() {
   }, []);
 
   return (
-    <>
-      <p>Chat App</p>
-    </>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Join />} />
+        <Route
+          path="/chat"
+          element={
+            <Protected>
+              <Chat />
+            </Protected>
+          }
+        />
+        <Route path="*" element={<Navigate to="/" replace />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
