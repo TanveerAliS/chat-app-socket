@@ -13,11 +13,18 @@ app.get('/', (req, res) => {
 
 io.on('connection', (socket) => {
     console.log('⚡️ A user connected ')
+
+    //Disconnection
     socket.on('disconnect', () => {
         console.log('🔥 user disconnected')
     })
-})
 
+    //Broadcasting Event
+    socket.on('my message', (msg) => {
+        io.emit('Broadcast Msg:', `server: ${msg}`)
+    })
+
+})
 
 http.listen(3000, () => {
     console.log('listening on *:3000')

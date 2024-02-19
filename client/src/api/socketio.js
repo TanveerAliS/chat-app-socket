@@ -12,3 +12,11 @@ export const disconnectSocket = () => {
     console.log('Disconnecting socket...')
     if (socket) socket.disconnect()
 }
+
+export const subscribeToChat = (cb) => {
+    socket.emit('my message', 'Hello there from React.')
+
+    socket.on('my broadcast', msg => {
+        return cb(null, msg)
+    })
+}
