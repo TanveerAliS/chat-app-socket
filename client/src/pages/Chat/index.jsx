@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./Chat.css";
+import ChatHeader from "../../components/ChatHeader";
 
 const Chat = ({}) => {
   const [name, setName] = useState("");
@@ -15,7 +16,7 @@ const Chat = ({}) => {
   return (
     <div className="outerContainer">
       <div className="container">
-        <span>Chat content / btn / info</span>
+        <ChatHeader />
       </div>
     </div>
   );
