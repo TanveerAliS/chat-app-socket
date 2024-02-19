@@ -3,12 +3,16 @@ import { io } from 'socket.io-client'
 
 let socket
 
-export const initiateSocketConnection = (token) => {
+export const initiateSocketConnection = (token, redirect) => {
     socket = io(process.env.REACT_APP_SOCKET_ENDPOINT, {
         auth: {
             token
         },
         transports: ["websocket"]
+    })
+    socket.on("connect", () => {
+        localStorage.setItem('token', socket.auth.token)
+        redirect()
     })
     console.log(`Connecting socket...`)
 }
