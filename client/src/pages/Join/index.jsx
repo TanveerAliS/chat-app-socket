@@ -1,9 +1,20 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import "./Join.css";
+import { initiateSocketConnection } from "../../api/socketio";
+import { useNavigate } from "react-router-dom";
 
 export default function Join() {
   const [token, setToken] = useState("");
   const tokenInputRef = useRef("");
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (token) {
+      initiateSocketConnection(token, () => {
+        navigate("/chat");
+      });
+    }
+  }, [token]);
 
   const submitToken = (e) => {
     e.preventDefault();

@@ -3,8 +3,13 @@ import { io } from 'socket.io-client'
 
 let socket
 
-export const initiateSocketConnection = () => {
-    socket = io(process.env.REACT_APP_SOCKET_ENDPOINT)
+export const initiateSocketConnection = (token) => {
+    socket = io(process.env.REACT_APP_SOCKET_ENDPOINT, {
+        auth: {
+            token
+        },
+        transports: ["websocket"]
+    })
     console.log(`Connecting socket...`)
 }
 
