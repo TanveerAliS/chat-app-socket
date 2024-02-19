@@ -1,7 +1,7 @@
 const app = require('express')()
 const http = require('http').createServer(app)
 const jwt = require('jsonwebtoken')
-
+const cors = require('cors')
 // jwt secret
 const JWT_SECRET = 'chat-app-hash'
 
@@ -13,11 +13,22 @@ const io = require("socket.io")(http, {
         credentials: true
     },
 })
-
+app.use(cors())
 app.get('/', (req, res) => {
     res.send('Chat app - server')
 })
 
+// Expose an endpoint to return user details
+app.get('/getUserDetails', async (req, res) => {
+    const token = req.query.token
+    try {
+        const user = await jwt.verify(token, JWT_SECRET)
+        console.log("server", user)
+        res.json(user)
+    } catch (e) {
+        res.status(401).json({ error: 'Invalid token' })
+    }
+})
 
 io.use(async (socket, next) => {
     // fetch token from handshake auth sent by FE
@@ -37,7 +48,11 @@ io.use(async (socket, next) => {
 })
 
 io.on('connection', (socket) => {
-    console.log('⚡️ A user connected ')
+    // join user's own room
+    socket.join(socket.user.id)
+    socket.join('myRandomChatRoomId')
+
+    console.log('⚡️ A user connected')
 
     //Disconnection
     socket.on('disconnect', () => {
@@ -47,6 +62,29 @@ io.on('connection', (socket) => {
     //Broadcasting Event
     socket.on('my message', (msg) => {
         io.emit('Broadcast Msg:', `server: ${msg}`)
+    })
+
+    socket.on('join', (roomName) => {
+        console.log('join: ' + roomName)
+        socket.join(roomName)
+    })
+
+    socket.on('message', ({ message, roomName }, callback) => {
+        console.log('message: ' + message + ' in ' + roomName)
+
+        // generate data to send to receivers
+        const outgoingMessage = {
+            name: socket.user.name,
+            id: socket.user.id,
+            message,
+        }
+        // send socket to all in room except sender
+        socket.to(roomName).emit("message", outgoingMessage)
+        callback({
+            status: "ok"
+        })
+        // send to all including sender
+        // io.to(roomName).emit('message', message);
     })
 
 })
