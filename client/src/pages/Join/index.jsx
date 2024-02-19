@@ -4,7 +4,7 @@ import { initiateSocketConnection } from "../../api/socketio";
 import { useNavigate } from "react-router-dom";
 
 export default function Join() {
-  const [token, setToken] = useState("");
+  const [token, setToken] = useState(localStorage.getItem("token") || "");
   const tokenInputRef = useRef("");
   const navigate = useNavigate();
 

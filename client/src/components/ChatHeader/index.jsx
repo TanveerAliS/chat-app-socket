@@ -6,11 +6,16 @@ const ChatHeader = ({ room }) => (
   <div className="infoBar">
     <div className="leftInnerContainer">
       <span className="onlineIcon"></span>
-      <h3>{room}</h3>
+      <h3>Meeting chat</h3>
     </div>
     <div className="rightInnerContainer">
       <a href="/">
-        <span className="closeIcon">&times;</span>
+        <span
+          onClick={() => localStorage.removeItem("token")}
+          className="closeIcon"
+        >
+          &times;
+        </span>
       </a>
     </div>
   </div>

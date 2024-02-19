@@ -1,30 +1,32 @@
 import React from "react";
 
 import "./Message.css";
-const Message = ({ message: { message, name, id } }) => {
+const Message = ({ message: { message, name, id }, currentUser }) => {
   let isSentByCurrentUser = false;
+  console.log({ message, name, currentUser, id });
 
-  const trimmedName = name.trim().toLowerCase();
-  console.log({ message, name, id });
-  // if (user === trimmedName) {
-  //   isSentByCurrentUser = true
-  // }
+  const trimmedName = currentUser.name.trim().toLowerCase();
+  console.log({ message, name, currentUser }, trimmedName);
+  if (name.trim().toLowerCase() === trimmedName) {
+    isSentByCurrentUser = true;
+  }
 
   return isSentByCurrentUser ? (
     <div className="messageContainer justifyEnd">
-      <p className="sentText pr-10">{trimmedName}</p>
       <div className="messageBox backgroundBlue">
+        <span className="sentText">{currentUser.name}</span>
         <p className="messageText colorWhite">{message}</p>
       </div>
     </div>
   ) : (
     <div className="messageContainer justifyStart">
       <div className="messageBox backgroundLight">
+        <span className="sentText">{name}</span>
         <p className="messageText colorDark">{message}</p>
       </div>
-      <p className="sentText pl-10 ">{name}</p>
     </div>
   );
 };
 
-export default Message;
+const MemoizedMessage = React.memo(Message);
+export default MemoizedMessage;

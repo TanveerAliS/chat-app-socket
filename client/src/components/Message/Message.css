@@ -1,6 +1,6 @@
 .messageBox {
   background: #f3f3f3;
-  border-radius: 20px;
+  border-radius: 16px;
   padding: 5px 20px;
   color: white;
   display: inline-block;
@@ -32,14 +32,7 @@
   font-family: Helvetica;
   color: #828282;
   letter-spacing: 0.3px;
-}
-
-.pl-10 {
-  padding-left: 10px;
-}
-
-.pr-10 {
-  padding-right: 10px;
+  padding-top: 4px;
 }
 
 .justifyStart {
@@ -60,10 +53,10 @@
 
 .backgroundBlue {
   background: #2979ff;
+  border-bottom-left-radius: 0.2em;
 }
 
 .backgroundLight {
   background: #f3f3f3;
-  border-bottom-right-radius: 0.5em;
-  border-bottom-left-radius: 0.5em;
+  border-bottom-right-radius: 0.2em;
 }
