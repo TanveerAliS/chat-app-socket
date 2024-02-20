@@ -16,5 +16,13 @@ export default defineConfig(({ mode }) => {
       'process.env': processEnv
     },
     plugins: [react()],
+    rollupOptions: {
+      external: ["react", "react-router", "react-router-dom", "react-redux"],
+      output: {
+        globals: {
+          react: "React",
+        },
+      },
+    },
   }
 })
