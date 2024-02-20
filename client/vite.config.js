@@ -17,7 +17,7 @@ export default defineConfig(({ mode }) => {
     },
     plugins: [react()],
     build: {
-      outDir: "build",
+      outDir: "dist",
       rollupOptions: {
         external: ["react", "react-router", "react-router-dom", "react-redux", 'react-scroll-to-bottom'],
         output: {
