@@ -2,6 +2,12 @@
 
 Integrated chat component for organizers and participants in meetings, accessible on both organizer and participant frontends. Supports text content exclusively, with authentication for all users. Enables participants to view new messages without page reload.
 
+
+
+https://github.com/TanveerAliS/chat-app-socket/assets/3439040/51783371-90b2-42c6-9062-5bb6f0755d5e
+
+
+
 **Functional Requirements:**
 
 - Send and receive text messages (excluding file attachments and multimedia content).
