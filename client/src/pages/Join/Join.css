@@ -43,7 +43,7 @@ body {
   color: #fff !important;
   text-transform: uppercase;
   text-decoration: none;
-  background: #1018e1;
+  background: #2979ff;
   padding: 20px;
   border-radius: 5px;
   display: inline-block;
@@ -51,11 +51,14 @@ body {
   width: 100%;
 }
 
+.button:hover {
+  filter: drop-shadow(0 0 0.5em #2979ff);
+}
 .mt-20 {
   margin-top: 20px;
 }
 
-@media (min-width: 320px) and (max-width: 480px) {
+@media (min-width: 320px) and (max-width: 640px) {
   .joinOuterContainer {
     height: 100%;
   }

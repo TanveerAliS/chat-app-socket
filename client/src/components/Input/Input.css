@@ -27,3 +27,7 @@ select:focus {
   border: none;
   width: 20%;
 }
+
+.sendButton:hover {
+  filter: drop-shadow(0 0 0.5em #2979ff);
+}

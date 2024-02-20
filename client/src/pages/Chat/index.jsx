@@ -42,12 +42,6 @@ const Chat = () => {
       getUserDetails(token).then((data) => {
         setCurrentUser(data);
       });
-
-      // Cleanup function: disconnect socket and clear local storage on component unmount
-      return () => {
-        disconnectSocket();
-        localStorage.removeItem("token");
-      };
     }
   }, [token, navigate]);
 
